@@ -280,20 +280,32 @@ terraform destroy --var=deploy_phase2=true --auto-approve
 ```
 or do it phase base:
 For revoking phase 2 only:
-
+In this step all of configuration of ArgoCD will be deleted.
 
 ```bash
 terraform destroy --target=module.phase2 --var=deploy_phase2=true
 ```
 Revoking only phase 1:
 
+In this step all of mtls application and logs stash revok, like :
+- Victoria Metrics
+- Istio 
+- Kiali for monitoring mtls
+- ArgoCD application
+- Open telemetry for deliverying metrics
+- Secrets 
+- Namespaces
+
 ```bash
 terraform destroy --target=module.phase1
 ```
-In most commonn it couldn't revoke namespace so you can proceed
+
+
 Revoking phase 0 
+k3d cluster revoke
+
 ```bash
-terraform destroy --target=module.phase0 -->
+terraform destroy --target=module.phase0 --
  ```
 # Core Architectural Components
 ## 1. Istio Service Mesh & mTLS
