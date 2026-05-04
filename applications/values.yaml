@@ -1,0 +1,6 @@
+backend-chart:
+  namespaceOverride: "backend"
+  fullnameOverride: "backend-app-backend-chart"
+
+frontend-chart:
+  fullnameOverride: "frontend-app-frontend-chart"
