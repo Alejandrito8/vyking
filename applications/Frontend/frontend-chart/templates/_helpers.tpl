@@ -66,4 +66,10 @@ Create the backend service URL
 {{- $ns := default "backend" .Values.backend.namespace -}}
 {{- $port := default 8080 .Values.backend.port -}}
 {{- printf "http://backend-app-backend-chart.%s.svc.cluster.local:%d" $ns (int $port) -}}
+{{/*
+Create the backend FQDN strictly for Istio VirtualService host
+*/}}
+{{- define "frontend.backendHost" -}}
+{{- $ns := default "backend" .Values.backend.namespace -}}
+{{- printf "backend-app-backend-chart.%s.svc.cluster.local" $ns -}}
 {{- end -}}
