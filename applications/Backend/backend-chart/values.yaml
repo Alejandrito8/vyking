@@ -15,7 +15,7 @@ serviceAccount:
   annotations: {}
 
 database:
-  host: "infrastructure-db-postgresql.db.svc.cluster.local"
+  host: "infrastructure-app-postgresql.db.svc.cluster.local"
   name: "my_database"
   user: "postgres"
   # port: "5432"
