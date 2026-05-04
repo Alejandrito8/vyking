@@ -102,10 +102,12 @@ jobs:
         run: |
           IMAGE_ID=ghcr.io/${{ github.repository_owner }}/backend-app
           IMAGE_ID=$(echo $IMAGE_ID | tr '[A-Z]' '[a-z]')
+          
+          # 1. Push Docker Images (Required for ArgoCD deployment)
           docker push $IMAGE_ID:${{ github.run_number }}
           docker push $IMAGE_ID:latest
           
-          # Helm Registry Login
+          # 2. Package and Push Helm Chart to GHCR (Optional backup/artifact archiving)
           echo "${{ secrets.GH_PAT }}" | helm registry login ghcr.io -u ${{ github.actor }} --password-stdin
           
           BASE_VERSION=$(grep '^version:' applications/Backend/backend-chart/Chart.yaml | awk '{print $2}' | tr -d '"' | tr -d "'")
@@ -113,20 +115,3 @@ jobs:
           
           helm package applications/Backend/backend-chart --version $CHART_VER
           helm push backend-chart-*.tgz oci://ghcr.io/$(echo ${{ github.repository_owner }} | tr '[A-Z]' '[a-z]')/charts
-
-      - name: Update Backend Version in Umbrella Chart and Push to Git
-        run: |
-          BASE_VERSION=$(grep '^version:' applications/Backend/backend-chart/Chart.yaml | awk '{print $2}' | tr -d '"' | tr -d "'")
-          NEW_VERSION="${BASE_VERSION}-${{ github.run_number }}"
-          
-          echo "Updating backend-chart dependency to version $NEW_VERSION in Umbrella Chart"
-
-          yq -i '(.dependencies[] | select(.name == "backend-chart")).version = "'$NEW_VERSION'"' applications/Chart.yaml
-
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
-
-          git add applications/Chart.yaml
-          git commit -m "chore: bump backend-chart to $NEW_VERSION in Umbrella Chart [skip ci]"
-          git pull --rebase origin main
-          git push origin HEAD:main
