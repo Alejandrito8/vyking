@@ -15,8 +15,8 @@ spec:
   - match:
     - uri:
         prefix: /api/
-    rewrite:
-      uri: /
+    # rewrite:
+    #   uri: /
     retries:
       attempts: 3
       perTryTimeout: 2s
