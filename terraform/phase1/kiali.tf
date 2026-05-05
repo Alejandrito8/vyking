@@ -32,7 +32,7 @@ resource "helm_release" "kiali_server" {
 
   set {
     name  = "external_services.prometheus.url"
-    value = "http://victoria-metrics-victoria-metrics-single.istio-system.svc.cluster.local:8428"
+    value = "http://victoria-metrics-victoria-metrics-single-server.istio-system.svc.cluster.local:8428"
   }
 
   set {

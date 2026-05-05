@@ -4,8 +4,8 @@ metadata:
   name: {{ include "backend.fullname" . }}-dr
   namespace: {{ .Values.namespaceOverride | default .Release.Namespace }}
 spec:
-  host: {{ include "backend.fullname" . }}.{{ .Release.Namespace }}.svc.cluster.local
-  trafficPolicy:
+  host: {{ include "backend.fullname" . }}.{{ .Values.namespaceOverride | default .Release.Namespace }}.svc.cluster.local  trafficPolicy:
+  trafficPolicy:  
     tls:
       mode: ISTIO_MUTUAL
   subsets:
