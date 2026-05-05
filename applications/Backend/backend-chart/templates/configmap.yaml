@@ -4,4 +4,6 @@ metadata:
   name: {{ include "backend.fullname" . }}-config
   namespace: {{ .Values.namespaceOverride | default .Release.Namespace }}
 data:
-  DB_NAME: "{{ .Values.database.name }}"
+  DB_HOST: {{ .Values.database.host | quote }}
+  DB_NAME: {{ .Values.database.name | quote }}
+  DB_USER: {{ .Values.database.user | quote }}
