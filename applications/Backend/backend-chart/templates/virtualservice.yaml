@@ -9,7 +9,6 @@ spec:
   gateways:
   - mesh
   hosts:
-  - {{ include "backend.fullname" . }}
   - {{ include "backend.fullname" . }}.{{ .Values.namespaceOverride | default .Release.Namespace }}.svc.cluster.local
   http:
   - retries:
