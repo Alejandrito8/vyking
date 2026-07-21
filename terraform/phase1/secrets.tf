@@ -10,9 +10,9 @@ resource "kubernetes_secret" "ghcr-login_backend" {
     ".dockerconfigjson" = base64encode(jsonencode({
       auths = {
         "ghcr.io" = {
-          username = "nimanisha"
+          username = "Alejandrito8"
           password = var.dockerconfigjson
-          auth     = base64encode("nimanisha:${var.dockerconfigjson}")
+          auth     = base64encode("Alejandrito8:${var.dockerconfigjson}")
         }
       }
     }))
@@ -39,11 +39,11 @@ resource "kubernetes_secret" "ghcr_repo_all" {
     labels    = { "argocd.argoproj.io/secret-type" = "repository" }
   }
   data = {
-    name      = "ghcr-nimanisha"
+    name      = "ghcr-Alejandrito8"
     type      = "helm"
-    url       = "ghcr.io/nimanisha" 
+    url       = "ghcr.io/Alejandrito8" 
     enableOCI = "true"
-    username  = "nimanisha"
+    username  = "Alejandrito8"
     password  = var.dockerconfigjson
   }
 }

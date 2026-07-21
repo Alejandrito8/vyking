@@ -10,7 +10,7 @@ resource "kubernetes_manifest" "infrastructure_app" {
     spec = {
       project = "default"
       source = {
-        repoURL        = "https://github.com/nimanisha/vyking.git"
+        repoURL        = "https://github.com/Alejandrito8/vyking.git"
         targetRevision = "main"
         path           = "infrastructure"
         helm = {
@@ -43,7 +43,7 @@ resource "kubernetes_manifest" "applications_app" {
     spec = {
       project = "default"
       source = {
-        repoURL        = "https://github.com/nimanisha/vyking.git"
+        repoURL        = "https://github.com/Alejandrito8/vyking.git"
         targetRevision = "main"
         path           = "applications"
         # helm = {

@@ -2,7 +2,7 @@ namespaceOverride: "backend"
 replicaCount: 1
 
 image:
-  repository: ghcr.io/nimanisha/backend-app 
+  repository: ghcr.io/Alejandrito8/backend-app 
   tag: latest 
   pullPolicy: Always
 

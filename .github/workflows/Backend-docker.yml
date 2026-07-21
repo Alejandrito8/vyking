@@ -33,8 +33,8 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         with:
           args: >
-            -Dsonar.projectKey=nimanisha_vyking_backend
-            -Dsonar.organization=nimanisha
+            -Dsonar.projectKey=Alejandrito8_vyking_backend
+            -Dsonar.organization=Alejandrito8
             -Dsonar.sources=applications/Backend
             -Dsonar.projectName=vyking-backend
             -Dsonar.java.binaries=.

@@ -43,7 +43,7 @@ This allows access to the frontend application via a friendly domain name.
 Clone the project repository from GitHub and move into the project directory.
 
 ```bash
-git clone https://github.com/nimanisha/vyking.git
+git clone https://github.com/Alejandrito8/vyking.git
 cd vyking
 ```
 ## Step 3: Install Terraform (v1.14.3)
