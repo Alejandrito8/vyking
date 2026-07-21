@@ -41,7 +41,7 @@ resource "kubernetes_secret" "ghcr_repo_all" {
   data = {
     name      = "ghcr-Alejandrito8"
     type      = "helm"
-    url       = "ghcr.io/Alejandrito8" 
+    url       = "ghcr.io/alejandrito8"
     enableOCI = "true"
     username  = "Alejandrito8"
     password  = var.dockerconfigjson
