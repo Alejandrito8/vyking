@@ -25,9 +25,19 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
+
+      - name: Check SonarCloud token availability
+        id: sonar-token
+        run: |
+          if [ -n "${{ secrets.SONAR_TOKEN }}" ]; then
+            echo "enabled=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "enabled=false" >> "$GITHUB_OUTPUT"
+            echo "SONAR_TOKEN is not set; skipping SonarCloud scan."
+          fi
           
       - name: SonarCloud Scan
-        if: ${{ secrets.SONAR_TOKEN != '' }}
+        if: steps.sonar-token.outputs.enabled == 'true'
         uses: SonarSource/sonarqube-scan-action@v5 
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
