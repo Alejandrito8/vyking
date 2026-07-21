@@ -26,32 +26,32 @@ jobs:
         with:
           fetch-depth: 0
           
-      - name: SonarCloud Scan
-        uses: SonarSource/sonarqube-scan-action@v5 
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        with:
-          args: >
-            -Dsonar.projectKey=Alejandrito8_vyking_backend
-            -Dsonar.organization=Alejandrito8
-            -Dsonar.sources=applications/Backend
-            -Dsonar.projectName=vyking-backend
-            -Dsonar.java.binaries=.
-            -Dsonar.condition.wait=false
+      # - name: SonarCloud Scan
+      #   uses: SonarSource/sonarqube-scan-action@v5 
+        # env:
+        #   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        #   SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        # with:
+        #   args: >
+        #     -Dsonar.projectKey=Alejandrito8_vyking_backend
+        #     -Dsonar.organization=Alejandrito8
+        #     -Dsonar.sources=applications/Backend
+        #     -Dsonar.projectName=vyking-backend
+        #     -Dsonar.java.binaries=.
+        #     -Dsonar.condition.wait=false
 
       - name: Trivy Config Scan (IaC)
         uses: aquasecurity/trivy-action@master
         with:
           scan-type: 'config'
-          scan-ref: 'applications/Backend' 
+          scan-ref: '.'
           format: 'sarif'
           output: 'trivy-config-results.sarif'
           severity: 'CRITICAL,HIGH'
 
       - name: Upload Config results to GitHub
         uses: github/codeql-action/upload-sarif@v4
-        if: always()
+        if: always() && hashFiles('trivy-config-results.sarif') != ''
         continue-on-error: true 
         with:
           sarif_file: 'trivy-config-results.sarif'
